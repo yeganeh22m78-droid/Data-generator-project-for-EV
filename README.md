@@ -1,107 +1,184 @@
-# ⚡ EMDT Test Data Generator
+🚗 EMDT Test Data Generator (EMDT‑TDG)
+Synthetic Electric Vehicle Data Generator for the Electric Mobility Digital Twin Project
+A desktop application built with Python, Tkinter, and SQLite for generating realistic synthetic EV datasets.
+Designed for the Electric Mobility Digital Twin (EMDT) project at LAB University of Applied Sciences.
 
-A desktop application for generating realistic test data for the **Electric Mobility Digital Twin (EMDT)** project — a research initiative by LAB University of Applied Sciences and LUT University, funded by the European Union (EAKR).
+📌 Features
+🔋 Five EV Data Categories
+Battery Sensor Data
 
----
+Charging Session Data
 
-## 📌 About This Project
+Powertrain & Motor Data
 
-This tool was built as part of a first-year IT internship at LAB University of Applied Sciences (Lahti, Finland). The goal is to generate realistic fake data for testing the EMDT platform — a modular digital twin architecture for electric mobility systems.
+Grid & Energy Mix Data
 
-The generated data simulates real-world electric vehicle (EV) sensor readings, enabling developers to test the platform without needing actual vehicle hardware.
+Trip & Driving Telemetry
 
----
+🖥️ Modern Desktop UI
+Custom dark theme
 
-## 🚗 Data Types
+Banner image (Pillow)
 
-The generator produces five types of EV-related test data:
+Dynamic table (Treeview)
 
-| Data Type | Fields |
-|---|---|
-| **Battery Sensor** | State of charge, voltage, temperature, current, health |
-| **Charging Session** | Charger type, location, energy delivered, cost, duration |
-| **Powertrain & Motor** | Speed, RPM, torque, motor efficiency, temperatures |
-| **Grid & Energy** | Solar/wind power, grid load, CO₂ intensity |
-| **Vehicle Trip** | Distance, energy used, CO₂ saved, route type |
+Status bar + footer
 
----
+Manual entry dialog
 
-## 🛠 Built With
+📤 Export Formats
+CSV
 
-- **Python** — core language
-- **Tkinter** — desktop UI (built-in, no installation needed)
-- **random** — realistic data generation (built-in)
-- **json** — JSON export (built-in)
-- **csv** — CSV export (built-in)
+JSON
 
-> No external libraries required. Everything runs on standard Python.
+SQL script (CREATE TABLE + INSERT)
 
----
+SQLite database (.db)
 
-## 🚀 Getting Started
+🧠 Smart Data Handling
+SQL type inference
 
-### Requirements
+Data normalization
 
-- Python 3.x
+Type‑safe manual entry
 
-### Run
+Linked UI components
 
-```bash
-python emdt_data_generator.py
-```
+Realistic EV values based on Tesla Model 3 specifications
 
-No `pip install` needed.
+🛠️ Technologies Used
+Python 3.12
 
----
+Tkinter (GUI)
 
-## 🖥 How to Use
+Pillow (image handling)
 
-1. Select a **data type** from the dropdown (Battery, Charging, Powertrain, Grid, Trip)
-2. Choose the **number of records** to generate (1–1000)
-3. Click **Generate** — data appears in the table instantly
-4. Export as **CSV** (Excel-compatible) or **JSON** (developer-friendly)
+SQLite3
 
----
+CSV / JSON
 
-## 📁 Output Formats
+Dataclasses & Type Hints
 
-| Format | Best For |
-|---|---|
-| **CSV** | Non-technical stakeholders, Excel users |
-| **JSON** | Developers, API testing, system integration |
+🚀 How to Run
+bash
+python main.py
+No installation required — all dependencies except Pillow are built into Python.
 
-Both formats were chosen to serve the two main user groups identified in the EMDT project documentation: engineers who need structured data for APIs, and non-technical stakeholders who prefer spreadsheets.
+Install Pillow if needed:
 
----
+bash
+pip install pillow
+📂 Project Structure
+Code
+EMDT-TDG/
+ ├── main.py
+ ├── theme.py
+ ├── data_generators.py
+ ├── export_sql.py
+ ├── manual_entry.py
+ ├── assets/
+ │    └── ev_banner.png
+ └── README.md
+📸 Screenshots
+(Add your own screenshots here)
 
-## 🔬 About the EMDT Project
+Code
+[ UI Screenshot ]
+[ Manual Entry Dialog ]
+[ Export Examples ]
+📊 Data Types Overview
+🔋 Battery Sensor Data
+SOC (%)
 
-The **Electric Mobility Digital Twin** project aims to create a modular, scalable digital twin platform architecture that supports the comprehensive development of electric mobility. It is implemented as a group project between:
+Voltage (V)
 
-- **LAB University of Applied Sciences** — software and data architecture
-- **LUT University (EMRC)** — electric mobility research and hardware expertise
+Current (A)
 
-The project is co-funded by the European Union through the European Regional Development Fund (EAKR), under the programme *Uudistuva ja osaava Suomi 2021–2027*.
+Temperature (°C)
 
----
+Health (%)
 
-## 📚 References & Inspiration
+Charge cycles
 
-- [EMDT Project Documentation (EAKR 2021/406132)](https://www.eura2021.fi)
-- [Faker Library](https://faker.readthedocs.io) — studied for data generation patterns
-- [InfluxDB EV Data Generator](https://github.com) — studied for EV field structure
-- [Python Tkinter Documentation](https://docs.python.org/3/library/tkinter.html)
+Status (Charging / Driving / Idle)
 
----
+⚡ Charging Session
+Charger type (AC / DC)
 
-## 👤 Author
+Start & end SOC
 
-**Yeganeh Maleki**
-First-year IT student — LAB University of Applied Sciences
-Internship project, 2025–2026
+Energy delivered (kWh)
 
----
+Duration (min)
 
-## 📄 License
+Cost (€)
 
-This project is open source and available under the [MIT License](LICENSE).
+🏎️ Powertrain & Motor
+Speed (km/h)
+
+Motor RPM (0–19,000)
+
+Torque (Nm)
+
+Motor & inverter temperature
+
+Efficiency (%)
+
+🌍 Grid & Energy Mix
+Solar & wind power (kW)
+
+Grid load (kW)
+
+EV load (kW)
+
+Renewable %
+
+CO₂ intensity (g/kWh)
+
+Frequency (Hz)
+
+🚘 Trip & Driving
+Distance (km)
+
+Duration (min)
+
+Avg speed (km/h)
+
+Energy consumption (kWh)
+
+Regenerative braking (kWh)
+
+CO₂ saved (kg)
+
+🧪 Why These Values Are Realistic
+All ranges and values are based on real Tesla Model 3 specifications and EV research sources.
+
+Primary Source (Official):
+Tesla Model 3 — https://www.tesla.com/model3
+
+Additional Technical Sources:
+TopSpeed — Battery size, voltage, charging
+
+Recurrent Auto — Battery behavior
+
+LamMotor — Motor RPM & torque
+
+EVSpecifications — Full technical specs
+
+Tesla Owner’s Manual — Temperature & charging limits
+
+FleetNews — Long Range model data
+
+🧩 Project Purpose
+This tool was developed for the Electric Mobility Digital Twin (EMDT) project to provide:
+
+High‑quality synthetic EV datasets
+
+For simulation, testing, and research
+
+When real EV hardware data is unavailable
+
+👩‍💻 Author
+Yeganeh Maleki  
+LAB University of Applied Sciences
+2026
