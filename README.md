@@ -1,184 +1,80 @@
-🚗 EMDT Test Data Generator (EMDT‑TDG)
-Synthetic Electric Vehicle Data Generator for the Electric Mobility Digital Twin Project
-A desktop application built with Python, Tkinter, and SQLite for generating realistic synthetic EV datasets.
-Designed for the Electric Mobility Digital Twin (EMDT) project at LAB University of Applied Sciences.
+# EMDT Test Data Generator
 
-📌 Features
-🔋 Five EV Data Categories
-Battery Sensor Data
+**Electric Mobility Digital Twin — Test Data Generator (v2.5)**
 
-Charging Session Data
+A desktop application built with Python and Tkinter that generates realistic, configurable test data for electric vehicle digital twin systems — including battery sensors, charging sessions, powertrain telemetry, grid/energy data, vehicle trips, and real-world Kempower charging station sessions.
 
-Powertrain & Motor Data
+---
 
-Grid & Energy Mix Data
+## 📌 Overview
 
-Trip & Driving Telemetry
+Teams developing digital twin systems for electric vehicles need realistic sample data to test their software before real hardware or field data is available. **EMDT Test Data Generator** solves this by producing physically realistic, reproducible test data across six sensor/event types, with built-in validation, visualization, and multiple export formats.
 
-🖥️ Modern Desktop UI
-Custom dark theme
+## ✨ Features
 
-Banner image (Pillow)
+- **Six data types**: Battery Sensor, Charging Session, Powertrain & Motor, Grid & Energy, Vehicle Trip, and Kempower Station Session (using real GPS coordinates from 12 actual charging stations in Finland).
+- **Realistic value ranges**: e.g. vehicle speed based on real Tesla Model 3 specifications, GPS coordinates constrained to Finland's borders.
+- **Reproducible data**: generate the exact same dataset again using a seed value — useful for repeatable QA testing.
+- **Responsive UI**: data generation runs on a background thread (via Python's `threading` and `queue` modules) so the interface never freezes, even with large record counts.
+- **Data validation**: every field is checked against defined ranges or allowed values, including cross-field rules (e.g. charge percentage must increase over a session).
+- **Interactive map**: view generated GPS data (points or trips) on a simple, offline schematic map with pan, zoom, and category-based coloring.
+- **Manual entry**: add or edit individual records by hand, with the same validation rules applied.
+- **Multiple export formats**: CSV, JSON, SQL script, or a ready-to-use SQLite database file.
 
-Dynamic table (Treeview)
+## 🖥️ Screenshot
 
-Status bar + footer
+*(Add a screenshot of the running application here)*
 
-Manual entry dialog
+## 🛠️ Built With
 
-📤 Export Formats
-CSV
+- **Python 3** — core language
+- **Tkinter** — graphical user interface
+- **threading / queue** — background data generation without freezing the UI
+- **sqlite3** — SQLite database export
+- **Pillow (optional)** — banner image support (app works without it)
+- **logging** — console and file logging (`emdt.log`)
 
-JSON
+## 🚀 Getting Started
 
-SQL script (CREATE TABLE + INSERT)
+### Prerequisites
 
-SQLite database (.db)
+- Python 3.10+
+- (Optional) [Pillow](https://pypi.org/project/pillow/) for the banner image:
+  ```bash
+  pip install pillow
+  ```
 
-🧠 Smart Data Handling
-SQL type inference
+### Running the app
 
-Data normalization
+```bash
+python emdt_test_data_generator_v2.5_advanced_map.py
+```
 
-Type‑safe manual entry
+## 📖 Usage
 
-Linked UI components
+1. Select a data type from the dropdown (e.g. *Battery Sensor*).
+2. Set the number of records, the time interval between them, and (optionally) a seed for reproducible results.
+3. Click **Generate**.
+4. View the data in the table, check summary statistics, or view GPS data on the map.
+5. Export the data using the **CSV**, **JSON**, **SQL**, or **SQLite** buttons.
 
-Realistic EV values based on Tesla Model 3 specifications
+## 🏗️ Architecture Notes
 
-🛠️ Technologies Used
-Python 3.12
+- Each data type is defined by a small generator function and registered in a central `DATA_TYPES` registry — adding a new sensor type only requires writing one function and one registry entry.
+- Data generation and validation logic are fully decoupled from the UI, making them independently testable.
+- All configuration values (window size, record limits, colors, fonts) are centralized in `AppConfig` and `Theme` dataclasses rather than scattered through the code.
 
-Tkinter (GUI)
+## ⚠️ Limitations
 
-Pillow (image handling)
+- Currently implemented as a single file; a larger version of this project would benefit from being split into separate modules (generators, UI, export).
+- No automated test suite yet — the generator and validation functions are pure functions and would be straightforward to test with `pytest`.
+- The map is a simplified schematic for visual orientation only, not an accurate geographic projection.
 
-SQLite3
+## 👤 Author
 
-CSV / JSON
+**Yeganeh Maleki**
+First-Year IT Student, LAB University of Applied Sciences
 
-Dataclasses & Type Hints
+## 📄 License
 
-🚀 How to Run
-bash
-python main.py
-No installation required — all dependencies except Pillow are built into Python.
-
-Install Pillow if needed:
-
-bash
-pip install pillow
-📂 Project Structure
-Code
-EMDT-TDG/
- ├── main.py
- ├── theme.py
- ├── data_generators.py
- ├── export_sql.py
- ├── manual_entry.py
- ├── assets/
- │    └── ev_banner.png
- └── README.md
-📸 Screenshots
-(Add your own screenshots here)
-
-Code
-[ UI Screenshot ]
-[ Manual Entry Dialog ]
-[ Export Examples ]
-📊 Data Types Overview
-🔋 Battery Sensor Data
-SOC (%)
-
-Voltage (V)
-
-Current (A)
-
-Temperature (°C)
-
-Health (%)
-
-Charge cycles
-
-Status (Charging / Driving / Idle)
-
-⚡ Charging Session
-Charger type (AC / DC)
-
-Start & end SOC
-
-Energy delivered (kWh)
-
-Duration (min)
-
-Cost (€)
-
-🏎️ Powertrain & Motor
-Speed (km/h)
-
-Motor RPM (0–19,000)
-
-Torque (Nm)
-
-Motor & inverter temperature
-
-Efficiency (%)
-
-🌍 Grid & Energy Mix
-Solar & wind power (kW)
-
-Grid load (kW)
-
-EV load (kW)
-
-Renewable %
-
-CO₂ intensity (g/kWh)
-
-Frequency (Hz)
-
-🚘 Trip & Driving
-Distance (km)
-
-Duration (min)
-
-Avg speed (km/h)
-
-Energy consumption (kWh)
-
-Regenerative braking (kWh)
-
-CO₂ saved (kg)
-
-🧪 Why These Values Are Realistic
-All ranges and values are based on real Tesla Model 3 specifications and EV research sources.
-
-Primary Source (Official):
-Tesla Model 3 — https://www.tesla.com/model3
-
-Additional Technical Sources:
-TopSpeed — Battery size, voltage, charging
-
-Recurrent Auto — Battery behavior
-
-LamMotor — Motor RPM & torque
-
-EVSpecifications — Full technical specs
-
-Tesla Owner’s Manual — Temperature & charging limits
-
-FleetNews — Long Range model data
-
-🧩 Project Purpose
-This tool was developed for the Electric Mobility Digital Twin (EMDT) project to provide:
-
-High‑quality synthetic EV datasets
-
-For simulation, testing, and research
-
-When real EV hardware data is unavailable
-
-👩‍💻 Author
-Yeganeh Maleki  
-LAB University of Applied Sciences
-2026
+*(Add a license here, e.g. MIT, if you'd like others to be able to reuse this code)*
