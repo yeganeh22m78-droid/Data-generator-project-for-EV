@@ -82,6 +82,3 @@ Checks ran without a display, with Tkinter replaced by a stub. The application w
 
 **Files changed:** `emdt_test_data_generator.py`  
 **Files added:** `README.md`
-```
-
-این متن Markdown است و در GitHub، Notion یا Word (با paste) خوب نمایش داده می‌شود. اگر برای ایمیل متن ساده (بدون علامت‌های `#` و `**`) می‌خواهی، بگو تا همان را بدون فرمت بدهم.
